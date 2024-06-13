@@ -3,10 +3,18 @@ import { Card, CardContent } from '@/components/ui/card';
 import { formatAsCedi, type ProductsResponse } from '@/utils';
 import { Button } from './ui/button';
 
-const ProductsGrid = ({ products }: { products: ProductsResponse['data'] }) => {
+const ProductsGrid = ({
+	products,
+	limit,
+}: {
+	products: ProductsResponse['data'];
+	limit?: number;
+}) => {
+	const displayedProducts = limit ? products.slice(0, limit) : products;
+
 	return (
 		<div className='pt-12 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-			{products.slice(0, 4).map((product) => {
+			{displayedProducts.map((product) => {
 				const { name, price, image, company, category } = product;
 				const cediAmount = formatAsCedi(price);
 				return (
@@ -35,17 +43,20 @@ const ProductsGrid = ({ products }: { products: ProductsResponse['data'] }) => {
 					</Link>
 				);
 			})}
-			<div className='col-span-full flex justify-center items-center'>
-				<Button
-					asChild
-					variant='outline'
-					size='lg'
-					className='flex justify-center items-center capitalize'
-				>
-					<Link to='/products'>see all products</Link>
-				</Button>
-			</div>
+			{limit && (
+				<div className='col-span-full flex justify-center items-center'>
+					<Button
+						asChild
+						variant='outline'
+						size='lg'
+						className='flex justify-center items-center capitalize'
+					>
+						<Link to='/products'>see all products</Link>
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 };
+
 export default ProductsGrid;
