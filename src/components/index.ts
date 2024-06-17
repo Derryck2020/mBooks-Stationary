@@ -19,3 +19,8 @@ export { default as ProductList } from './ProductsList';
 export { default as Loading } from './Loading';
 export { default as FormInput } from './FormInput';
 export { default as SelectInput } from './SelectInput';
+export { default as PriceRange } from './PriceRange';
+export { default as SelectProductAmount } from './SelectProductAmount';
+export { default as SingleProductPageImage } from './SingleProductPageImage';
+export { default as CartItemsList } from './CartItemsList';
+export { default as CartTotals } from './CartTotals';
